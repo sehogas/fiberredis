@@ -1,0 +1,18 @@
+version: "3.2"
+
+services:
+  redis:
+    image: "redis:alpine"
+    command: redis-server --requirepass password
+    ports:
+      - "6379:6379"
+    volumes:
+      - ~/docker/compose/redis/redis-data:/var/lib/redis
+      - ~/docker/compose/redis/redis-conf:/usr/local/etc/redis/redis.conf
+    environment:
+      - REDIS_REPLICATION_MODE=master
+      - ENABLE_OVERCOMMIT_MEMORY=true
+
+volumes:
+  redis-data:
+  redis-conf:
